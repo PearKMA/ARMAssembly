@@ -1,0 +1,64 @@
+AREA RESET,DATA,READONLY
+			DCD 0x20001000
+			DCD Reset_Handler
+		;ALIGN
+	arMatran		DCD		1, 6, 10
+					DCD		4, 2, 0
+					DCD		5, 25, 0
+		
+		AREA MYCODE,CODE,READONLY
+		ENTRY
+		EXPORT Reset_Handler
+		
+	Reset_Handler
+	SoPTDuongCheo	equ		3
+	
+	start
+			
+			mov		R2, #1
+			ldr		R3, =SoPTDuongCheo
+			ldr		R1, =arMatran	
+			mov 	r5,[r1]		;min = arr[0]
+			mov		R0, #0		;max=0
+	
+	Chinh
+			ldr		R4, [R1]
+			cmp		r0,r4
+			bgt		tiep1
+			mov		r0,r4
+	tiep1
+			cmp		r5,r4
+			blt		tiep2
+			mov		r5,r4
+			
+	tiep2
+			add		R2,r2, #1
+			add		R1,r1, #16
+			
+			cmp		R2, R3
+			ble		Chinh
+	KhoiTaoLai
+			mov		R2, #1
+			ldr		R1, =arMatran
+			add		R1,r1, #8
+			mov 	r7,[r1]		;min = arr[2]
+			mov 	r6,#0		;max=0
+			
+	Phu
+			ldr		R4, [R1]
+			cmp		r6,r4
+			bgt		tiep1
+			mov		r6,r4
+	tiep3
+			cmp		r7,r4
+			blt		tiep2
+			mov		r7,r4
+	
+	tiep4
+			add		R2,r2, #1
+			add		R1,r1, #8
+			
+			cmp		R2, R3
+			ble		Phu	
+	stop b stop
+		END
