@@ -1,0 +1,46 @@
+		AREA RESET,DATA,READONLY
+			DCD 0x20001000
+			DCD Reset_Handler
+		;ALIGN
+	arMatran		DCD		1, 6, 10
+					DCD		4, 2, 0
+					DCD		5, 25, 0
+		
+		AREA MYCODE,CODE,READONLY
+		ENTRY
+		EXPORT Reset_Handler
+		
+	Reset_Handler
+	SoPTMaTran	equ		9
+	
+	start
+			mov		R0, #0
+			mov		R2, #1
+			ldr		R3, =SoPTMaTran
+			ldr		R1, =arMatran
+	LapTinh
+			ldr		R4, [R1] ;nap phan tu hien tai cua ma tran tu bo nho vao thanh ghi R4
+			
+			;kiem	tra chan, le
+			udiv 	r6,r4,#2
+			mls 	r6,r6,#2,r4
+			cmp 	r6,#0
+			bne 	le
+			add 	r0,r4
+			b		ThayDoi
+	le
+			add		R5,r4
+
+			
+			;thay	doi bien dem va dia chi
+	ThayDoi
+			add		R2,r2, #1
+			add		R1,r1, #4
+			
+			cmp		R2, R3
+			ble		LapTinh
+			;ket		thuc: R0 = tong so chan; R5 = tong so le
+
+		
+	stop b stop
+		END
