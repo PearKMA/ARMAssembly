@@ -1,0 +1,30 @@
+		AREA RESET,DATA,READONLY
+			DCD 0x20001000
+			DCD Reset_Handler
+		;ALIGN
+	arr	DCD 2,5,6,7,8,9,1,3
+		
+		AREA MYCODE,CODE,READONLY
+		ENTRY
+		EXPORT Reset_Handler
+		
+	Reset_Handler
+	count EQU 8
+	
+	start
+		mov R0,#0 
+		ldr r1,=arr
+		mov r2,#0
+		ldr r3,=count
+	do
+		ldr r4,[r1,r2]
+		add r0,r4
+		add r2,#4
+		subs r3,#1
+		cmp r3,#0 
+		bgt do
+		ldr r3,=count
+		udiv r0,r3
+		
+	stop b stop
+		END
