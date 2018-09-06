@@ -1,3 +1,2 @@
 # ARMAssembly
-Lập trình nhúng
-Code bắt đầu từ lab2
+Hiện chỉ có bài 1 và 3, bài 2 stack nghiên cứu sau
