@@ -1,4 +1,4 @@
-; Khai bao doan du lieu   (1-x^n+1)/(1-x)
+; Khai bao doan du lieu  (x^n+1 -1)/(x-1)
 	AREA    RESET, DATA, READONLY
 		DCD  0x20001000     ; stack pointer value when stack is empty
 		DCD  Reset_Handler  ; reset vector
@@ -33,9 +33,8 @@ thoat
 	nop
 	endp
 sum proc
-	mov r4,#1
-	subs r4,#1,r0
-	subs r5,#1,r3
+	subs r4,r0,#1
+	subs r5,r3,#1
 	sdiv r0,r4,r5
 	endp
 stop b stop
