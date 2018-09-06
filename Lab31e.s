@@ -31,5 +31,6 @@ tinhToan proc
 	bl tinhToan
 thoat
 	nop
+	endp
 stop b stop
 end
